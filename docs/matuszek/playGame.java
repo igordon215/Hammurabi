@@ -47,33 +47,63 @@ public class playGame {
             hammurabi.landValue = hammurabi.newCostOfLand();
 
         }
-            if (year GAME_LENGTH){
+            if (year > GAME_LENGTH) {
                 //WIN
+    }        //
             //
             //
-            //
         }
-            private int askAcresToBuy(){
+        private int askAcresToBuy(Hammurabi hammurabi) {
+            System.out.println("How many acres do you wish to buy? (0-" + (hammurabi.bushels / hammurabi.landValue) + ")");
+               return hammurabi.scanner.nextInt();
 
         }
-            private int askAcresToSell(){
+            private int askAcresToSell(Hammurabi hammurabi){
+                System.out.println(("acres to sell? (0-" + hammurabi.acresOwned + ")");
+                return hammurabi.scanner.nextInt();
 
         }
-            private int askBushelsToFeed90{
+            private int askBushelsToFeed(Hammurabi hammurabi){
+                System.out.println("bushels to feed ppl? (0-" + hammurabi.bushels + ")");
+                 return hammurabi.scanner.nextInt();
 
         }
-            private int askAcresToPlant{
+            private int askAcresToPlant(Hammurabi hammurabi){
+                 int maxAcres = Math.min(hammurabi.acresOwned, hammurabi.bushels / 2);
+                 maxAcres = Math.min(maxAcres, hammurabi.population * 10);
+                    System.out.println("acres to plant? (0-" + maxAcres + ")");
+                    return hammurabi.scanner.nextInt();
 
         }
-            private void processTurn90{
+            private void processTurn(Hammurabi hammurabi, int acresToBuy, int  acresToSell, int  bushelsToFeed){
                 //buy/sell land
+                hammurabi.acresOwned += acresToBuy - acresToSell;
+                hammurabi.bushels -= acresToBuy * hammurabi.landValue;
+                hammurabi.bushels += acresToSell * hammurabi.landValue;
                 //feed people
+                hammurabi.bushels -= bushelsToFeed;
                 // plant crops
-                
+                hammurabi.bushels -= acresToPlant / 2;
 
                 // calc results
+            int peopleStarved = hammurabi.starvationDeaths(hammurabi.population, bushelsToFeed);
+            hammurabi.population -= peopleStarved;
+
+            int plagueVictims = hammurabi.plagueDeaths(hammurabi.population);
+            hammurabi.population -= plagueVictims;
+
+            int harvestYield = hammurabi.harvest(acresToPlant);
+            hammurabi.bushels += acresToPlant * harvestYield;
+
+            int grainLost = hammurabi.grainEatenByRats(hammurabi.bushels);
+            hammurabi.bushels -= grainLost;
+
+            int newImmigrants = hammurabi.immigrants(hammurabi.population, hammurabi.bushels, hammurabi.acresOwned);
+            hammurabi.population += newImmigrants;
+
+            //reports
         }
-    }
+
 
 
 
