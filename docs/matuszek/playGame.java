@@ -27,19 +27,33 @@ public class playGame {
             System.out.println("‣ BUSHELS IN STORAGE " + hammurabi.bushels);
             System.out.println("‣ LAND VALUE " + hammurabi.landValue);
 
-            // PLAYER CHOICE
+//            // PLAYER CHOICE
             int acresToBuy = askAcresToBuy(hammurabi);
             int acresToSell = askAcresToSell(hammurabi);
-            int bushelsToFeed = askBushelsToFeed(hammurabi);
-            int acresToPlant = askAcresToPlant(hammurabi);
 
-            // PROCESS TURN
+            // Update acresOwned immediately
             hammurabi.acresOwned += acresToBuy - acresToSell;
             hammurabi.bushels -= acresToBuy * hammurabi.landValue;
             hammurabi.bushels += acresToSell * hammurabi.landValue;
 
+            int bushelsToFeed = askBushelsToFeed(hammurabi);
+            int acresToPlant = askAcresToPlant(hammurabi);
+
+            // PROCESS TURN
             hammurabi.bushels -= bushelsToFeed;
             hammurabi.bushels -= acresToPlant / 2;
+//            int acresToBuy = askAcresToBuy(hammurabi);
+//            int acresToSell = askAcresToSell(hammurabi);
+//            int bushelsToFeed = askBushelsToFeed(hammurabi);
+//            int acresToPlant = askAcresToPlant(hammurabi);
+//
+//            // PROCESS TURN
+//            hammurabi.acresOwned += acresToBuy - acresToSell;
+//            hammurabi.bushels -= acresToBuy * hammurabi.landValue;
+//            hammurabi.bushels += acresToSell * hammurabi.landValue;
+//
+//            hammurabi.bushels -= bushelsToFeed;
+//            hammurabi.bushels -= acresToPlant / 2;
 
             int peopleStarved = hammurabi.starvationDeaths(hammurabi.population, bushelsToFeed);
             hammurabi.population -= peopleStarved;
@@ -48,7 +62,9 @@ public class playGame {
             hammurabi.population -= plagueVictims;
 
             int harvestYield = hammurabi.harvest(acresToPlant);
-            hammurabi.bushels += acresToPlant * harvestYield;
+            hammurabi.bushels += harvestYield;
+            //int harvestYield = hammurabi.harvest(acresToPlant);
+           //hammurabi.bushels += acresToPlant * harvestYield;
 
             int grainLost = hammurabi.grainEatenByRats(hammurabi.bushels);
             hammurabi.bushels -= grainLost;
@@ -60,7 +76,9 @@ public class playGame {
             System.out.println("-----------------------------------------\nYEAR-END REPORT 📋:\n");
             System.out.println("➣ " + peopleStarved + " PEOPLE STARVED 😱");
             System.out.println("➣ " + plagueVictims + " PEOPLE DIED FROM THE PLAGUE 👻");
-            System.out.println("➣ THE HARVEST YIELDED: " + harvestYield + " BUSHELS PER ACRE 💰");
+            int yieldPerAcre = acresToPlant > 0 ? harvestYield / acresToPlant : 0;
+            System.out.println("➣ THE HARVEST YIELDED: " + yieldPerAcre + " BUSHELS PER ACRE 💰");
+            //System.out.println("➣ THE HARVEST YIELDED: " + harvestYield + " BUSHELS PER ACRE 💰");
             System.out.println("➣ " + grainLost + " 🐀 BUSHELS WERE LOST TO RATS 🐀");
             System.out.println("➣ " + newImmigrants + " NEW IMMIGRANTS ARRIVED IN THE CITY 👨‍👩‍👧‍👦 \n-----------------------------------------");
 

@@ -57,7 +57,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                 return;
             }
 
-            immigrants = immigrants(population, bushels, acresOwned);
+            immigrants = immigrants(population, acresOwned, bushels);
             population += immigrants;
 
             harvested = harvest(acresToPlant);
@@ -113,7 +113,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         if (grain <= bushels) {
             return grain;
         }
-        System.out.println("  Great Hammurambi, we have only " + bushels + " bushels!");
+        System.out.println("  Great Hammurabi, we have only " + bushels + " bushels!");
         return 0;
     }
 
@@ -154,11 +154,15 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     // but the grain is still gone. You don't get any benefit from having happy subjects. Return the number
     // of deaths from starvation (possibly zero).
     public int starvationDeaths(int population, int bushels) {
-        int starved = population - bushels / 20;
-        if (starved <= 0) {
-            starved = 0;
-        }
-        return starved;
+//        int peopleFed = bushels / 20;
+//        int starved = population - peopleFed;
+//        if (starved < 0) {
+//            starved = 0;
+//        }
+//        return starved;
+        int peopleFed = bushels / 20;
+        int starved = population - peopleFed;
+        return starved > 0 ? starved : 0;
     }
 
     //Return true if more than 45% of the people starve.
@@ -176,14 +180,21 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         if (population <= 0 || starvationDeaths(population, bushels) > 0) {
             return 0;
         }
-        return (acresOwned + bushels) / (population * 4) - 17;
+        int immigrants = ((20 * acresOwned + bushels) / (100 * population)) + 1;
+        return immigrants > 0 ? immigrants : 0;
+//        if (population <= 0 || starvationDeaths(population, bushels) > 0) {
+//            return 0;
+//        }
+//        return (acresOwned + bushels) / (population * 4) - 17;
     }
 
     //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain.
     //(Example: if you planted 50 acres, and your number is 3, you harvest 150 bushels of grain). Return the number of bushels harvested.
-    public int harvest(int acresOwned) {
+    public int harvest(int acresPlanted) {
         int yieldPerAcre = rand.nextInt(6) + 1;
-        return acresOwned * yieldPerAcre;
+        return acresPlanted * yieldPerAcre;
+        //int yieldPerAcre = rand.nextInt(6) + 1;
+        //return acresOwned * yieldPerAcre;
         //return rand.nextInt(6) + 1; (acresOwned)
     }
 
@@ -191,9 +202,14 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     // between 10% and 30% of your grain. Return the amount of grain eaten by rats (possibly zero).
     public int grainEatenByRats(int bushels) {
         if (rand.nextDouble() <= 0.4) {
-            return rand.nextInt(21) + 10;
+            int percentEaten = rand.nextInt(21) + 10;
+            return (bushels * percentEaten) / 100;
         }
         return 0;
+//        if (rand.nextDouble() <= 0.4) {
+//            return rand.nextInt(21) + 10;
+//        }
+//        return 0;
     }
 
     //The price of land is random, and ranges from 17 to 23 bushels per acre.
