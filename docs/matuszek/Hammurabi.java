@@ -52,6 +52,10 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
 
             starved = starvationDeaths(population, grainToFeed);
             population -= starved;
+                if (uprising(population,starved)){
+                    System.out.println("You have been overthrown due to extreme mismanagement");
+                    return;
+                }
 
             immigrants = immigrants(population, bushels, acresOwned);
             population += immigrants;
@@ -86,6 +90,41 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         System.out.println("Land is currently worth " + landValue + " bushels per acre.");
     }
 
+    int askHowManyAcresToBuy(int price, int acresOwned) {
+        int acres = getNumber("How many acres do you wish to buy? ");
+        if (acres * price <= bushels) {
+            return acres;
+        }
+        System.out.println(" Great Hammurabi, we only have" + bushels + " bushels");
+        return 0;
+    }
+
+    int askHowManyAcresToSell(int acresOwned) {
+        int acres = getNumber("How many acres do you wish to sell? ");
+        if (acres <= acresOwned) {
+            return acres;
+        }
+        System.out.println(" Great Hammurabi, we only have " + acresOwned + " acres!");
+        return 0;
+    }
+
+    int askHowMuchGrainToFeedPeople(int bushels) {
+        int grain = getNumber("How many bushels do you wish to feed your people? ");
+        if (grain <= bushels) {
+            return grain;
+        }
+        System.out.println("  Great Hammurambi, we have only " + bushels + " bushels!");
+        return 0;
+    }
+
+    int askHowManyAcresToPlant(int acresOwned, int population, int bushels) {
+        int acres = getNumber("How many acres do you wish to plant with seed? ");
+        if (acres <= acresOwned && acres <= population * 10 && acres * 2 <= bushels){
+            return acres;
+        }
+        System.out.println(" Great Hammurabi, we don't have enough resources for that!");
+        return 0;
+    }
 
     //Each year, there is a 15% chance of a horrible plague. When this happens,
     //half your people die.Return the number of plague deaths (possibly zero).
