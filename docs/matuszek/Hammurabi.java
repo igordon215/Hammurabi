@@ -177,15 +177,15 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     // If everyone is well fed, compute how many people come to the city as:
     // (20 * _number of acres you have_ + _amount of grain you have in storage_) / (100 * _population_) + 1
     public int immigrants(int population, int bushels, int acresOwned) {
-        if (population <= 0 || starvationDeaths(population, bushels) > 0) {
-            return 0;
-        }
-        int immigrants = ((20 * acresOwned + bushels) / (100 * population)) + 1;
-        return immigrants > 0 ? immigrants : 0;
 //        if (population <= 0 || starvationDeaths(population, bushels) > 0) {
 //            return 0;
 //        }
-//        return (acresOwned + bushels) / (population * 4) - 17;
+//        int immigrants = ((20 * acresOwned + bushels) / (100 * population)) + 1;
+//        return immigrants > 0 ? immigrants : 0;
+        if (population <= 0 || starvationDeaths(population, bushels) > 0) {
+            return 0;
+        }
+        return (acresOwned + bushels) / (population * 4) - 17;
     }
 
     //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain.
