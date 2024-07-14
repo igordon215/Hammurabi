@@ -16,6 +16,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     public static void main(String[] args) { // required in every Java program
             //new Hammurabi().playGame();
     }
+
     //Each year, there is a 15% chance of a horrible plague. When this happens,
     //half your people die.Return the number of plague deaths (possibly zero).
     public int plagueDeaths(int population) {
