@@ -1,5 +1,7 @@
 package hammurabi.docs.matuszek;
 
+import java.util.Scanner;
+
 public class playGame {
     public static void main(String[] args) {
         playGame game = new playGame();
@@ -97,7 +99,7 @@ public class playGame {
     }
 
     private int askBushelsToFeed(Hammurabi hammurabi) {
-        SSystem.out.println("HOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE? (0-" + hammurabi.bushels + ")");
+        System.out.println("HOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE? (0-" + hammurabi.bushels + ")");
         return getValidInput(0, hammurabi.bushels, hammurabi.scanner);
     }
 
@@ -106,5 +108,21 @@ public class playGame {
         maxAcres = Math.min(maxAcres, hammurabi.population * 10);
         System.out.println("HOW MANY ACRES DO YOU WISH TO PLANT? (0-" + maxAcres + ")");
         return getValidInput(0, maxAcres, hammurabi.scanner);
+    }
+
+    private int getValidInput(int min, int max, Scanner scanner) {
+        while (true){
+            try{
+                String input = scanner.nextLine().trim();
+                int value = Integer.parseInt(input);
+                if (value >= min && value <= max){
+                    return value;
+                } else {
+                    System.out.println("PLEASE ENTER A NUMBER BETWEEN " + min + " AND " + max);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("PLEASE ENTER A VALID NUMBER");
+            }
+        }
     }
 }
