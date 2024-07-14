@@ -1,5 +1,7 @@
 package hammurabi.docs.matuszek;
 
+import java.time.Year;
+
 public class playGame {
     public static void main(String[] args) {
         playGame game = new playGame();
@@ -15,11 +17,11 @@ public class playGame {
         System.out.println("👑 YOU ARE THE RULER OF ANCIENT SUMERIA FOR 10-YEAR TERM 👑");
 
         while (year <= GAME_LENGTH) {
-            System.out.println("\n--- YEAR " + year + " ---");
-            System.out.println("POPULATION: " + hammurabi.population);
-            System.out.println("ACRES OWNED: " + hammurabi.acresOwned);
-            System.out.println("BUSHELS IN STORAGE: " + hammurabi.bushels);
-            System.out.println("LAND VALUE: " + hammurabi.landValue);
+            System.out.println("YEAR" + year);
+            System.out.println("POPULATION" + hammurabi.population);
+            System.out.println("ACRES OWNED" + hammurabi.acresOwned);
+            System.out.println("BUSHELS IN STORAGE" + hammurabi.bushels);
+            System.out.println("LAND VALUE" + hammurabi.landValue);
 
             //player choice
 
@@ -115,13 +117,6 @@ public class playGame {
 
 
         //reports
-        System.out.println("\nYEAR-END REPORT:");
-        System.out.println(peopleStarved + " PEOPLE STARVED");
-        System.out.println(plagueVictims + " PEOPLE DIED FROM PLAGUE");
-        System.out.println(" THE HARVEST YIELDED " + harvestYield + " BUSHELS PER ACRE");
-        System.out.println(grainLost + " BUSHELS TO RATS ");
-        System.out.println(newImmigrants + " NEW IMMIGRANTS ARRIVED TO YOU CITY ");
-
     }
 
 
