@@ -86,24 +86,25 @@ public class playGame {
     }
 
     private int askAcresToBuy(Hammurabi hammurabi) {
-        System.out.println("HOW MANY ACRES DO YOU WISH TO BUY? (0-" + (hammurabi.bushels / hammurabi.landValue) + ")");
-        return hammurabi.scanner.nextInt();
+        int maxAcresToBuy = hammurabi.bushels / hammurabi.landValue;
+        System.out.println("HOW MANY ACRES DO YOU WISH TO BUY? (0-" + maxAcresToBuy + ")");
+        return getValidInput(0, maxAcresToBuy, hammurabi.scanner);
     }
 
     private int askAcresToSell(Hammurabi hammurabi) {
         System.out.println("HOW MANY ACRES DO YOU WISH TO SELL? (0-" + hammurabi.acresOwned + ")");
-        return hammurabi.scanner.nextInt();
+        return getValidInput(0, hammurabi.acresOwned, hammurabi.scanner);
     }
 
     private int askBushelsToFeed(Hammurabi hammurabi) {
-        System.out.println("HOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE? (0-" + hammurabi.bushels + ")");
-        return hammurabi.scanner.nextInt();
+        SSystem.out.println("HOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE? (0-" + hammurabi.bushels + ")");
+        return getValidInput(0, hammurabi.bushels, hammurabi.scanner);
     }
 
     private int askAcresToPlant(Hammurabi hammurabi) {
         int maxAcres = Math.min(hammurabi.acresOwned, hammurabi.bushels / 2);
         maxAcres = Math.min(maxAcres, hammurabi.population * 10);
         System.out.println("HOW MANY ACRES DO YOU WISH TO PLANT? (0-" + maxAcres + ")");
-        return hammurabi.scanner.nextInt();
+        return getValidInput(0, maxAcres, hammurabi.scanner);
     }
 }
