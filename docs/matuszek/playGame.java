@@ -53,30 +53,30 @@ public class playGame {
             hammurabi.population += newImmigrants;
 
             // END OF YEAR REPORTS
-            System.out.println("\nYEAR-END REPORT 📋:\n-----------------------------------------");
-            System.out.println(peopleStarved + " PEOPLE STARVED 😱");
-            System.out.println(plagueVictims + " PEOPLE DIED FROM THE PLAGUE 👻");
-            System.out.println("THE HARVEST YIELDED: " + harvestYield + " BUSHELS PER ACRE 💰");
-            System.out.println(grainLost + " 🐀 BUSHELS WERE LOST TO RATS 🐀");
-            System.out.println(newImmigrants + " NEW IMMIGRANTS ARRIVED IN THE CITY ‍👩‍👧‍👦 \n-----------------------------------------");
+            System.out.println("-----------------------------------------\nYEAR-END REPORT 📋:\n");
+            System.out.println(peopleStarved + "➣ PEOPLE STARVED 😱");
+            System.out.println(plagueVictims + "➣ PEOPLE DIED FROM THE PLAGUE 👻");
+            System.out.println("➣ THE HARVEST YIELDED: " + harvestYield + " BUSHELS PER ACRE 💰");
+            System.out.println(grainLost + "➣ 🐀 BUSHELS WERE LOST TO RATS 🐀");
+            System.out.println(newImmigrants + "➣ NEW IMMIGRANTS ARRIVED IN THE CITY 👨‍👩‍👧‍👦 \n-----------------------------------------");
 
             if (hammurabi.population <= 0) {
-                System.out.println("☠️ YOUR ENTIRE POPULATION HAS DIED ☠️... GAME OVER‼️");
+                System.out.println("☠️ YOUR ENTIRE POPULATION HAS DIED ☠️... GAME OVER ‼️");
                 break;
             }
             if (hammurabi.uprising(hammurabi.population, peopleStarved)) {
-                System.out.println("✊THE PEOPLE HAVE REVOLTED AGAINST YOU DUE TO STARVATION‼️ YOU HAVE BEEN OVERTHROWN⚔️");
+                System.out.println("✊ THE PEOPLE HAVE REVOLTED AGAINST YOU DUE TO STARVATION ‼️ YOU HAVE BEEN OVERTHROWN⚔️");
                 break;
             }
             year++;
             hammurabi.landValue = hammurabi.newCostOfLand();
         }
         if (year > GAME_LENGTH) {
-            System.out.println("CONGRATULATIONS! YOU'VE COMPLETED YOUR 10-YEAR TERM AS RULER OF SUMERIA🎖");
+            System.out.println("🎉 CONGRATULATIONS! YOU'VE COMPLETED YOUR 10-YEAR TERM AS RULER OF SUMERIA 🎖");
         }
-        System.out.println("FINAL POPULATION " + hammurabi.population);
-        System.out.println("FINAL ACRES OWNED " + hammurabi.acresOwned);
-        System.out.println("FINAL BUSHELS IN STORAGE " + hammurabi.bushels);
+        System.out.println("➣ FINAL POPULATION " + hammurabi.population);
+        System.out.println("➣ FINAL ACRES OWNED " + hammurabi.acresOwned);
+        System.out.println("➣ FINAL BUSHELS IN STORAGE " + hammurabi.bushels);
     }
 
     private int askAcresToBuy(Hammurabi hammurabi) {
@@ -110,10 +110,10 @@ public class playGame {
                 if (value >= min && value <= max){
                     return value;
                 } else {
-                    System.out.println("PLEASE ENTER A NUMBER BETWEEN " + min + " AND " + max);
+                    System.out.println("❗️ PLEASE ENTER A NUMBER BETWEEN " + min + " AND " + max);
                 }
             } catch (NumberFormatException e) {
-                System.out.println("PLEASE ENTER A VALID NUMBER");
+                System.out.println("❗️ PLEASE ENTER A VALID NUMBER");
             }
         }
     }
