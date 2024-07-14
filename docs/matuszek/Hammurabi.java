@@ -26,12 +26,52 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
             int immigrants = 0;
             int ratsAte = 0;
 
-        int askHowManyAcresToBuy(int price, int bushels)
-        int askHowManyAcresToSell(int acresOwned)
-        int askHowMuchGrainToFeedPeople(int bushels)
-        int askHowManyAcresToPlant(int acresOwned, int population, int bushels)
-        //Great Hammurabi, surely you jest! We have only 3415 bushels left!)
+       //decisions
+    while (year <= 10) {
+        int acresToBuy = askHowManyAcresToBuy(landValue, bushels);
+        int acresToSell = 0;
+        if (acresToBuy == 0){
+            acresToSell = askHowManyAcresToSell(acresOwned);
         }
+        int grainToFeed = askHowMuchGrainToFeedPeople(bushels);
+        int acresToPlant = askHowManyAcresToPlant(acresOwned,population,bushels);
+
+        //updates
+        acresOwned += acresToBuy - acresToSell;
+        bushels -= acresToBuy * landValue;
+        bushels += acresToSell * landValue;
+        bushels -= grainToFeed;
+
+        //events
+        int plagueVictims = plagueDeaths(population);
+        population -= plagueVictims;
+
+        starved = starvationDeaths(population, grainToFeed);
+        population -= starved;
+
+        immigrants = immigrants(population, bushels, acresOwned);
+        population += immigrants;
+
+        harvested = harvest(acresToPlant);
+        bushels += harvested;
+
+        ratsAte = grainEatenByRats(bushels);
+        bushels -= ratsAte;
+
+        landValue = newCostOfLand();
+
+        year++;
+
+    }
+
+
+    finalSummary(population,acresOwned,year);
+
+
+
+    }
+
+
 
     //Each year, there is a 15% chance of a horrible plague. When this happens,
     //half your people die.Return the number of plague deaths (possibly zero).
