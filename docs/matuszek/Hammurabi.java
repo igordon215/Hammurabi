@@ -16,61 +16,75 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     public static void main(String[] args) { // required in every Java program
 
     }
+
     void playGame() {
-            int year = 1;
-            int population = 100;
-            int bushels = 2800;
-            int acresOwned = 1000;
-            int landValue = 19;
-            int starved = 0;
-            int immigrants = 0;
-            int ratsAte = 0;
+        int year = 1;
+        int population = 100;
+        int bushels = 2800;
+        int acresOwned = 1000;
+        int landValue = 19;
+        int starved = 0;
+        int immigrants = 0;
+        int ratsAte = 0;
+        int harvested = 0;
 
-       //decisions
-    while (year <= 10) {
-        int acresToBuy = askHowManyAcresToBuy(landValue, bushels);
-        int acresToSell = 0;
-        if (acresToBuy == 0){
-            acresToSell = askHowManyAcresToSell(acresOwned);
+        //decisions
+        while (year <= 10) {
+            printYearSummary(year, starved, immigrants, population, harvested, acresOwned, ratsAte, bushels, landValue);
+
+            int acresToBuy = askHowManyAcresToBuy(landValue, bushels);
+            int acresToSell = 0;
+            if (acresToBuy == 0) {
+                acresToSell = askHowManyAcresToSell(acresOwned);
+            }
+            int grainToFeed = askHowMuchGrainToFeedPeople(bushels);
+            int acresToPlant = askHowManyAcresToPlant(acresOwned, population, bushels);
+
+            //updates
+            acresOwned += acresToBuy - acresToSell;
+            bushels -= acresToBuy * landValue;
+            bushels += acresToSell * landValue;
+            bushels -= grainToFeed;
+
+            //events
+            int plagueVictims = plagueDeaths(population);
+            population -= plagueVictims;
+
+            starved = starvationDeaths(population, grainToFeed);
+            population -= starved;
+
+            immigrants = immigrants(population, bushels, acresOwned);
+            population += immigrants;
+
+            harvested = harvest(acresToPlant);
+            bushels += harvested;
+
+            ratsAte = grainEatenByRats(bushels);
+            bushels -= ratsAte;
+
+            landValue = newCostOfLand();
+
+            year++;
+
         }
-        int grainToFeed = askHowMuchGrainToFeedPeople(bushels);
-        int acresToPlant = askHowManyAcresToPlant(acresOwned,population,bushels);
-
-        //updates
-        acresOwned += acresToBuy - acresToSell;
-        bushels -= acresToBuy * landValue;
-        bushels += acresToSell * landValue;
-        bushels -= grainToFeed;
-
-        //events
-        int plagueVictims = plagueDeaths(population);
-        population -= plagueVictims;
-
-        starved = starvationDeaths(population, grainToFeed);
-        population -= starved;
-
-        immigrants = immigrants(population, bushels, acresOwned);
-        population += immigrants;
-
-        harvested = harvest(acresToPlant);
-        bushels += harvested;
-
-        ratsAte = grainEatenByRats(bushels);
-        bushels -= ratsAte;
-
-        landValue = newCostOfLand();
-
-        year++;
-
-    }
 
 
-    finalSummary(population,acresOwned,year);
-
+        finalSummary(population, acresOwned, year);
 
 
     }
 
+    void printYearSummary(int year, int starved, int immigrants, int population, int harvested, int acresOwned, int bushels, int landValue){
+        System.out.println("\n Great Hammurabi!");
+        System.out.println("You are in year " + year + " of your ten year rule.");
+        System.out.println("In the previous year " + starved + " people starved to death.");
+        System.out.println("In the previous year " + immigrants + " people entered the kingdom.");
+        System.out.println("The population is now " + population + ".");
+        System.out.println("We harvested " + harvested + " bushels at " + (harvested / acresOwned) + " bushels per acre.");
+        System.out.println("Rats destroyed " + ratsAte + " bushels, leaving " + bushels + " bushels in storage.");
+        System.out.println("The city owns " + acresOwned + " acres of land.");
+        System.out.println("Land is currently worth " + landValue + " bushels per acre.");
+    }
 
 
     //Each year, there is a 15% chance of a horrible plague. When this happens,
