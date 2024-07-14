@@ -14,8 +14,24 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
 
 
     public static void main(String[] args) { // required in every Java program
-        //new Hammurabi().playGame();
+
     }
+    void playGame() {
+            int year = 1;
+            int population = 100;
+            int bushels = 2800;
+            int acresOwned = 1000;
+            int landValue = 19;
+            int starved = 0;
+            int immigrants = 0;
+            int ratsAte = 0;
+
+        int askHowManyAcresToBuy(int price, int bushels)
+        int askHowManyAcresToSell(int acresOwned)
+        int askHowMuchGrainToFeedPeople(int bushels)
+        int askHowManyAcresToPlant(int acresOwned, int population, int bushels)
+        //Great Hammurabi, surely you jest! We have only 3415 bushels left!)
+        }
 
     //Each year, there is a 15% chance of a horrible plague. When this happens,
     //half your people die.Return the number of plague deaths (possibly zero).
