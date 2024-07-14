@@ -58,16 +58,12 @@ public class playGame {
 
             // END OF YEAR REPORTS
             System.out.println("-----------------------------------------\nYEAR-END REPORT 📋:\n");
-            System.out.println(peopleStarved + "➣ PEOPLE STARVED 😱");
-            System.out.println(plagueVictims + "➣ PEOPLE DIED FROM THE PLAGUE 👻");
+            System.out.println("➣ " + peopleStarved + " PEOPLE STARVED 😱");
+            System.out.println("➣ " + plagueVictims + " PEOPLE DIED FROM THE PLAGUE 👻");
             System.out.println("➣ THE HARVEST YIELDED: " + harvestYield + " BUSHELS PER ACRE 💰");
-            System.out.println(grainLost + "➣ 🐀 BUSHELS WERE LOST TO RATS 🐀");
-            System.out.println(newImmigrants + "➣ NEW IMMIGRANTS ARRIVED IN THE CITY 👨‍👩‍👧‍👦 \n-----------------------------------------");
+            System.out.println("➣ " + grainLost + " 🐀 BUSHELS WERE LOST TO RATS 🐀");
+            System.out.println("➣ " + newImmigrants + " NEW IMMIGRANTS ARRIVED IN THE CITY 👨‍👩‍👧‍👦 \n-----------------------------------------");
 
-//            if (hammurabi.population <= 0) {
-//                System.out.println("☠️ YOUR ENTIRE POPULATION HAS DIED ☠️... GAME OVER ‼️");
-//                break;
-//            }
             if (hammurabi.uprising(hammurabi.population, peopleStarved)) {
                 System.out.println("✊ THE PEOPLE HAVE REVOLTED AGAINST YOU DUE TO STARVATION ‼️ YOU HAVE BEEN OVERTHROWN⚔️");
                 break;
@@ -107,11 +103,11 @@ public class playGame {
     }
 
     private int getValidInput(int min, int max, Scanner scanner) {
-        while (true){
-            try{
+        while (true) {
+            try {
                 String input = scanner.nextLine().trim();
                 int value = Integer.parseInt(input);
-                if (value >= min && value <= max){
+                if (value >= min && value <= max) {
                     return value;
                 } else {
                     System.out.println("❗️ PLEASE ENTER A NUMBER BETWEEN " + min + " AND " + max);
