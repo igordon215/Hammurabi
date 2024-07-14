@@ -17,6 +17,10 @@ public class playGame {
         System.out.println("👑 YOU ARE THE RULER OF ANCIENT SUMERIA FOR 10-YEAR TERM 👑");
 
         while (year <= GAME_LENGTH) {
+            if (hammurabi.population <= 0) {
+                System.out.println("☠️ YOUR ENTIRE POPULATION HAS DIED ☠️... GAME OVER ‼️");
+                break;
+            }
             System.out.println("\n‣ YEAR " + year);
             System.out.println("‣ POPULATION " + hammurabi.population);
             System.out.println("‣ ACRES OWNED " + hammurabi.acresOwned);
@@ -60,10 +64,10 @@ public class playGame {
             System.out.println(grainLost + "➣ 🐀 BUSHELS WERE LOST TO RATS 🐀");
             System.out.println(newImmigrants + "➣ NEW IMMIGRANTS ARRIVED IN THE CITY 👨‍👩‍👧‍👦 \n-----------------------------------------");
 
-            if (hammurabi.population <= 0) {
-                System.out.println("☠️ YOUR ENTIRE POPULATION HAS DIED ☠️... GAME OVER ‼️");
-                break;
-            }
+//            if (hammurabi.population <= 0) {
+//                System.out.println("☠️ YOUR ENTIRE POPULATION HAS DIED ☠️... GAME OVER ‼️");
+//                break;
+//            }
             if (hammurabi.uprising(hammurabi.population, peopleStarved)) {
                 System.out.println("✊ THE PEOPLE HAVE REVOLTED AGAINST YOU DUE TO STARVATION ‼️ YOU HAVE BEEN OVERTHROWN⚔️");
                 break;
