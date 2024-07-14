@@ -14,7 +14,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
 
 
     public static void main(String[] args) { // required in every Java program
-
+        new Hammurabi().playGame();
     }
 
     void playGame() {
@@ -52,10 +52,10 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
 
             starved = starvationDeaths(population, grainToFeed);
             population -= starved;
-                if (uprising(population,starved)){
-                    System.out.println("You have been overthrown due to extreme mismanagement");
-                    return;
-                }
+            if (uprising(population, starved)) {
+                System.out.println("You have been overthrown due to extreme mismanagement");
+                return;
+            }
 
             immigrants = immigrants(population, bushels, acresOwned);
             population += immigrants;
@@ -78,7 +78,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
 
     }
 
-    void printYearSummary(int year, int starved, int immigrants, int population, int harvested, int acresOwned, int bushels, int landValue){
+    void printYearSummary(int year, int starved, int immigrants, int population, int harvested, int acresOwned, int ratsAte, int bushels, int landValue) {
         System.out.println("\n Great Hammurabi!");
         System.out.println("You are in year " + year + " of your ten year rule.");
         System.out.println("In the previous year " + starved + " people starved to death.");
@@ -90,7 +90,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         System.out.println("Land is currently worth " + landValue + " bushels per acre.");
     }
 
-    int askHowManyAcresToBuy(int price, int acresOwned) {
+    int askHowManyAcresToBuy(int price, int bushels) {
         int acres = getNumber("How many acres do you wish to buy? ");
         if (acres * price <= bushels) {
             return acres;
@@ -119,11 +119,25 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
 
     int askHowManyAcresToPlant(int acresOwned, int population, int bushels) {
         int acres = getNumber("How many acres do you wish to plant with seed? ");
-        if (acres <= acresOwned && acres <= population * 10 && acres * 2 <= bushels){
+        if (acres <= acresOwned && acres <= population * 10 && acres * 2 <= bushels) {
             return acres;
         }
         System.out.println(" Great Hammurabi, we don't have enough resources for that!");
         return 0;
+    }
+
+    void finalSummary(int population, int acresOwned, int years) {
+        System.out.println("\nGame Over!");
+        System.out.println("You ruled for " + years + " years.");
+        System.out.println("Final population: " + population);
+        System.out.println("Final land holdings: " + acresOwned + " acres");
+        int acresPerPerson = population > 0 ? acresOwned / population : 0;
+        System.out.println("Acres per person: " + acresPerPerson);
+    }
+
+    int getNumber(String message) {
+        System.out.print(message);
+        return scanner.nextInt();
     }
 
     //Each year, there is a 15% chance of a horrible plague. When this happens,
@@ -168,7 +182,9 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain.
     //(Example: if you planted 50 acres, and your number is 3, you harvest 150 bushels of grain). Return the number of bushels harvested.
     public int harvest(int acresOwned) {
-        return rand.nextInt(6) + 1;
+        int yieldPerAcre = rand.nextInt(6) + 1;
+        return acresOwned * yieldPerAcre;
+        //return rand.nextInt(6) + 1; (acresOwned)
     }
 
     //There is a 40% chance that you will have a rat infestation. When this happens, rats will eat somewhere
