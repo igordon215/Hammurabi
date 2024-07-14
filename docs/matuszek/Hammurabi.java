@@ -7,10 +7,10 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     Random rand = new Random();  // this is an instance variable
     Scanner scanner = new Scanner(System.in);
 
-    int population = 100;
-    int bushels = 2800;
-    int acresOwned = 1000;
-    int landValue = 19;
+   public int population = 100;
+   public int bushels = 2800;
+   public int acresOwned = 1000;
+   public int landValue = 19;
 
 
     public static void main(String[] args) { // required in every Java program
@@ -154,15 +154,12 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     // but the grain is still gone. You don't get any benefit from having happy subjects. Return the number
     // of deaths from starvation (possibly zero).
     public int starvationDeaths(int population, int bushels) {
-//        int peopleFed = bushels / 20;
-//        int starved = population - peopleFed;
-//        if (starved < 0) {
-//            starved = 0;
-//        }
-//        return starved;
         int peopleFed = bushels / 20;
         int starved = population - peopleFed;
         return starved > 0 ? starved : 0;
+//        int peopleFed = bushels / 20;
+//        int starved = population - peopleFed;
+//        return starved > 0 ? starved : 0;
     }
 
     //Return true if more than 45% of the people starve.

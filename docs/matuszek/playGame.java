@@ -28,28 +28,23 @@ public class playGame {
             System.out.println("‣ LAND VALUE " + hammurabi.landValue);
 
             // PLAYER CHOICE
-            //int acresToBuy = askAcresToBuy(hammurabi);
-            //int acresToSell = askAcresToSell(hammurabi);
             int acresToBuy = askAcresToBuy(hammurabi);
             hammurabi.acresOwned += acresToBuy;
             hammurabi.bushels -= acresToBuy * hammurabi.landValue;
+            System.out.println("YOU NOW OWN: " + hammurabi.acresOwned + " ACRES AND HAVE: " + hammurabi.bushels + " BUSHELS LEFT");
 
             int acresToSell = askAcresToSell(hammurabi);
+            int sellPrice = (int) (hammurabi.landValue * .7);  // 10% selling penalty
             hammurabi.acresOwned -= acresToSell;
-            hammurabi.bushels += acresToSell * hammurabi.landValue;
+            int bushelsGained = acresToSell * sellPrice;
+            System.out.println("YOU SOLD " + acresToSell + " ACRES AT " + sellPrice + " BUSHELS EACH.");
+            hammurabi.bushels += bushelsGained;
+            System.out.println("YOU NOW HAVE: " + hammurabi.bushels + " BUSHELS AFTER SELLING SOME LAND");
 
+            // PROCESS TURN
             int bushelsToFeed = askBushelsToFeed(hammurabi);
             int acresToPlant = askAcresToPlant(hammurabi);
 
-            // UPDATES ACRES_OWNED
-            hammurabi.acresOwned += acresToBuy - acresToSell;
-            hammurabi.bushels -= acresToBuy * hammurabi.landValue;
-            hammurabi.bushels += acresToSell * hammurabi.landValue;
-
-            //int bushelsToFeed = askBushelsToFeed(hammurabi);
-            //int acresToPlant = askAcresToPlant(hammurabi);
-
-            // PROCESS TURN
             hammurabi.bushels -= bushelsToFeed;
             hammurabi.bushels -= acresToPlant / 2;
 
@@ -59,8 +54,6 @@ public class playGame {
             int plagueVictims = hammurabi.plagueDeaths(hammurabi.population);
             hammurabi.population -= plagueVictims;
 
-//            int harvestYield = hammurabi.harvest(acresToPlant);
-//            hammurabi.bushels += harvestYield;
             int harvestYield = hammurabi.harvest(acresToPlant);
             hammurabi.bushels += harvestYield;
 
@@ -77,8 +70,6 @@ public class playGame {
             int yieldPerAcre = acresToPlant > 0 ? harvestYield / acresToPlant : 0;
             System.out.println("➣ THE HARVEST YIELDED: " + yieldPerAcre + " BUSHELS PER ACRE 💰");
             System.out.println("➣ TOTAL HARVEST: " + harvestYield + " BUSHELS 🌾");
-//            int yieldPerAcre = acresToPlant > 0 ? harvestYield / acresToPlant : 0;
-//            System.out.println("➣ THE HARVEST YIELDED: " + yieldPerAcre + " BUSHELS PER ACRE 💰");
             System.out.println("➣ " + grainLost + " 🐀 BUSHELS WERE LOST TO RATS 🐀");
             System.out.println("➣ " + newImmigrants + " NEW IMMIGRANTS ARRIVED IN THE CITY 👨‍👩‍👧‍👦 \n-----------------------------------------");
 
@@ -99,27 +90,24 @@ public class playGame {
 
     private int askAcresToBuy(Hammurabi hammurabi) {
         int maxAcresToBuy = hammurabi.bushels / hammurabi.landValue;
-        System.out.println("\n→ HOW MANY ACRES DO YOU WISH TO BUY? (0-" + maxAcresToBuy + ")");
+        System.out.println("\n→ HOW MANY ACRES DO YOU WISH TO BUY? (0-" + maxAcresToBuy + ") \nAT " + hammurabi.landValue + " BUSHELS PER ACRE: ");
         return getValidInput(0, maxAcresToBuy, hammurabi.scanner);
     }
 
     private int askAcresToSell(Hammurabi hammurabi) {
-        System.out.println("→ HOW MANY ACRES DO YOU WISH TO SELL? (0-" + hammurabi.acresOwned + ")");
+        System.out.println("\n→ HOW MANY ACRES DO YOU WISH TO SELL? (0-" + hammurabi.acresOwned + ") \nWITH A 25% TAX AT " + Math.floor(hammurabi.landValue * .75) + " BUSHELS PER ACRE: ");
         return getValidInput(0, hammurabi.acresOwned, hammurabi.scanner);
-
-        //System.out.println("→ HOW MANY ACRES DO YOU WISH TO SELL? (0-" + hammurabi.acresOwned + ")");
-       // return getValidInput(0, hammurabi.acresOwned, hammurabi.scanner);
     }
 
     private int askBushelsToFeed(Hammurabi hammurabi) {
-        System.out.println("→ HOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE? (0-" + hammurabi.bushels + ")");
+        System.out.println("\n→ HOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE? \n YOUR POPULATION IS: " + hammurabi.population + " YOU HAVE (0-" + hammurabi.bushels + ") BUSHELS TO FEED THEM");
         return getValidInput(0, hammurabi.bushels, hammurabi.scanner);
     }
 
     private int askAcresToPlant(Hammurabi hammurabi) {
         int maxAcres = Math.min(hammurabi.acresOwned, hammurabi.bushels / 2);
         maxAcres = Math.min(maxAcres, hammurabi.population * 10);
-        System.out.println("→ HOW MANY ACRES DO YOU WISH TO PLANT? (0-" + maxAcres + ")");
+        System.out.println("\n→ HOW MANY ACRES DO YOU WISH TO PLANT? (0-" + maxAcres + ")");
         return getValidInput(0, maxAcres, hammurabi.scanner);
     }
 
