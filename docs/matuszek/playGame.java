@@ -34,7 +34,7 @@ public class playGame {
             System.out.println("YOU NOW OWN: " + hammurabi.acresOwned + " ACRES AND HAVE: " + hammurabi.bushels + " BUSHELS LEFT");
 
             int acresToSell = askAcresToSell(hammurabi);
-            int sellPrice = (int) (hammurabi.landValue * .7);  // 10% selling penalty
+            int sellPrice = (int) (hammurabi.landValue * 0.75);  // 25% TAX. ADJUST @ askAcresToPlant ALSO.
             hammurabi.acresOwned -= acresToSell;
             int bushelsGained = acresToSell * sellPrice;
             System.out.println("YOU SOLD " + acresToSell + " ACRES AT " + sellPrice + " BUSHELS EACH.");
@@ -95,7 +95,8 @@ public class playGame {
     }
 
     private int askAcresToSell(Hammurabi hammurabi) {
-        System.out.println("\n→ HOW MANY ACRES DO YOU WISH TO SELL? (0-" + hammurabi.acresOwned + ") \nWITH A 25% TAX AT " + Math.floor(hammurabi.landValue * .75) + " BUSHELS PER ACRE: ");
+        int sellPrice = (int) (hammurabi.landValue * 0.75);
+        System.out.println("\n→ HOW MANY ACRES DO YOU WISH TO SELL? (0-" + hammurabi.acresOwned + ") \nWITH A 25% TAX AT " + sellPrice + " BUSHELS PER ACRE: "); // 25% TAX
         return getValidInput(0, hammurabi.acresOwned, hammurabi.scanner);
     }
 
@@ -108,6 +109,7 @@ public class playGame {
         int maxAcres = Math.min(hammurabi.acresOwned, hammurabi.bushels / 2);
         maxAcres = Math.min(maxAcres, hammurabi.population * 10);
         System.out.println("\n→ HOW MANY ACRES DO YOU WISH TO PLANT? (0-" + maxAcres + ")");
+        System.out.println("YOU HAVE " + hammurabi.bushels + " BUSHELS, PLANTING COST: 2 BUSHELS PER ACRE");
         return getValidInput(0, maxAcres, hammurabi.scanner);
     }
 

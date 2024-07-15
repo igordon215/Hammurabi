@@ -156,7 +156,12 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     public int starvationDeaths(int population, int bushels) {
         int peopleFed = bushels / 20;
         int starved = population - peopleFed;
-        return starved > 0 ? starved : 0;
+
+        if (starved < 0) {
+            starved = 0;
+        }
+
+        return starved;
 //        int peopleFed = bushels / 20;
 //        int starved = population - peopleFed;
 //        return starved > 0 ? starved : 0;
@@ -174,15 +179,21 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     // If everyone is well fed, compute how many people come to the city as:
     // (20 * _number of acres you have_ + _amount of grain you have in storage_) / (100 * _population_) + 1
     public int immigrants(int population, int bushels, int acresOwned) {
-//        if (population <= 0 || starvationDeaths(population, bushels) > 0) {
-//            return 0;
-//        }
-//        int immigrants = ((20 * acresOwned + bushels) / (100 * population)) + 1;
-//        return immigrants > 0 ? immigrants : 0;
         if (population <= 0 || starvationDeaths(population, bushels) > 0) {
             return 0;
         }
-        return (acresOwned + bushels) / (population * 4) - 17;
+        int newImmigrants =(acresOwned + bushels) / (population * 4) - 17 + rand.nextInt(5) + 1;
+        if (newImmigrants < 0) {
+            newImmigrants = 0;
+        }
+        return newImmigrants;
+
+
+//        if (population < 10 || starvationDeaths(population, bushels) > 0) {
+//            return 0;
+//        }
+//        int newImmigrants = ((20 * acresOwned + bushels) / (100 * population)) + rand.nextInt(5) + 1;
+//        return newImmigrants > 0 ? newImmigrants : 0;
     }
 
     //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain.
