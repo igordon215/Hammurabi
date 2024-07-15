@@ -13,7 +13,7 @@ public class playGame {
         int year = 1;
         final int GAME_LENGTH = 10;
 
-        System.out.println("🐪 WELCOME TO THE GAME OF HAMMURABI! 🐪");
+        System.out.println("\n🐪 WELCOME TO THE GAME OF HAMMURABI! 🐪");
         System.out.println("👑 YOU ARE THE RULER OF ANCIENT SUMERIA FOR 10-YEAR TERM 👑");
 
         while (year <= GAME_LENGTH) {
@@ -39,7 +39,7 @@ public class playGame {
             int bushelsGained = acresToSell * sellPrice;
             System.out.println("YOU SOLD " + acresToSell + " ACRES AT " + sellPrice + " BUSHELS EACH.");
             hammurabi.bushels += bushelsGained;
-            System.out.println("YOU NOW HAVE: " + hammurabi.bushels + " BUSHELS AFTER SELLING SOME LAND");
+            System.out.println("YOU NOW OWN: " + hammurabi.acresOwned + " ACRES AND HAVE: " + hammurabi.bushels + " BUSHELS LEFT");
 
             // PROCESS TURN
             int bushelsToFeed = askBushelsToFeed(hammurabi);
